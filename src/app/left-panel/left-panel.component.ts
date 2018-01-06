@@ -28,15 +28,22 @@ export class LeftPanelComponent implements OnInit {
     {jobName: 'CTO',jobType: 'j2', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 0 },
     {jobName: 'CTO',jobType: 'j2', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 1 },
 ];
-  jobTypes = ['j1', 'j2', 'j3'];
+  jobTypes: Array<string> = ['j1', 'j2', 'j3'];
+
+
+
+
+
+
   ngOnInit() {
     this.buildForm();
+    this.buildAddJobTypeForm();
   }
 
   buildForm() {
     this.jobForm = this.formBuilder.group({
-    jobName: ['', Validators.required ],
-    jobType: ['', Validators.required],
+    jobName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,15}$')] ],
+    jobType: ['', [Validators.required,  Validators.pattern('^[a-zA-Z.]{5,50}$')]],
     description: ['', Validators.required]
  });
 }
@@ -47,17 +54,18 @@ export class LeftPanelComponent implements OnInit {
   });
  }
 
-addNewJob() {
-  this.allEntity.push(this.jobForm.value);
+ clickingAddNewJob(data) {
+  data['date'] = new Date();
+  data['time'] = '1-1-2018';
+  data['internalIndex'] = this.jobTypes.indexOf(data.jobType);
+  this.allEntity.push(data.newJobType);
+  console.log(this.allEntity);
 }
 
-addNewJobType() {
-  this.jobTypes.push(this.addJobTypeForm.controls['newJobType'].value);
+addNewJobTypeInPopup(addJobTypeForm) {
+  this.jobTypes.push(addJobTypeForm.newJobType);
 }
 
-addMoreJobTypes() {
-  this.buildAddJobTypeForm();
-}
 
 showMoreButtonClick(i: number) {
   this.showMoreFlag[i] = true;
