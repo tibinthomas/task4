@@ -1,0 +1,50 @@
+<form [formGroup]="jobForm" (ngSubmit)="addNewJob()">
+
+  <label for="jobName">Job Name</label>
+  <input type="text" name="jobName" id="jobName" [formControl]="jobName">
+  <br>
+
+
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="jobType">Job Type</label>
+      <select name="jobType" id="jobType" [formControl]="jobType">
+        <option *ngFor="let jobType of jobTypes">{{jobType}}</option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <button (click)="addMoreJobTypes()" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> + </button>
+    </div>
+  </div>
+
+
+  <label for="description">Description</label>
+  <textarea rows="3" cols="20" name="description" id="description" [formControl]="description"></textarea>
+  <br>
+
+  <button type="submit">Add New Job</button>
+</form>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Job Type</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addJobTypeForm" (ngSubmit)="addNewJobType()">
+            <div class="form-group">
+              <label for="addJobTypeForm" class="form-control-label">Job Type Name: </label>
+              <input type="text" class="form-control" id="addJobTypeForm" [formControl]="newJobType">
+            </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add This Job Type</button>
+        </form>
+        </div>
+      </div>
+      </div>
+    </div>
