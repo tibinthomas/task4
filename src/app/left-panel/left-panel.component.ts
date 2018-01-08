@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-left-panel',
@@ -8,7 +9,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class LeftPanelComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private commService: AppService) { }
   jobForm: FormGroup;
   addJobTypeForm: FormGroup;
   showMoreFlag: Array<boolean> = [false];
@@ -82,6 +83,7 @@ showTop3ButtonClick(i: number) {
 clickOnApplyButton(entityIndex) {
   this.appliedTheButtonApply[entityIndex] = true;
   this.appliedJobs.push(this.allEntity[entityIndex]);
+  this.commService.changeInMessage(this.appliedJobs);
 }
 
 showApplied() {

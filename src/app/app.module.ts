@@ -7,6 +7,7 @@ import { RightPanelComponent } from './right-panel/right-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.router';
+import { AppService } from './app.service';
 
 
 
@@ -19,9 +20,9 @@ import { routes } from './app.router';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-   routes
+    routes
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

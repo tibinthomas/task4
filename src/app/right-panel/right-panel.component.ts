@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-right-panel',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commService: AppService) { }
+  appliedJobs;
 
   ngOnInit() {
+    this.commService.messageSource.subscribe(data => this.appliedJobs = data);
   }
 
 }
