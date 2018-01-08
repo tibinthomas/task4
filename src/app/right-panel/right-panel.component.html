@@ -1,0 +1,19 @@
+<table *ngIf="appliedTableShow" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Job Description</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appliedJob of appliedJobs">
+        <td>{{appliedJob.jobName}}</td>
+        <td>{{appliedJob.description}}</td>
+        <td>{{appliedJob.date | date:'mediumDate'}}</td>
+        <td>{{appliedJob.time}}</td>
+      </tr>                  
+    </tbody>
+</table>
+rret
