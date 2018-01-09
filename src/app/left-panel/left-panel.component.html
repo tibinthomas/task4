@@ -32,7 +32,7 @@
               <p *ngIf="jobForm.controls['description']?.errors?.maxlength && jobForm.controls['description'].touched" [style.color]="'red'">Exceded max length</p> -->
               <br>
             
-              <button type="submit"  [disabled]="">Add New Job</button>
+              <button type="submit" [disabled]="">Add New Job</button>
             </form>
             
             
@@ -57,11 +57,11 @@
                     </div>
                   </div>
                   </div>
-                </div>
+            </div>
       </div>
       <div class="col-md-8 my-border">
-          <div *ngFor="let jobType of jobTypes; let jobTypeIndex = index">
-              <label>Job Type: {{ jobType }}</label>
+          <div *ngFor="let jobType of jobTypesFilter | slice : start : end; let jobTypeIndex = index">
+              <label>Job Type: {{ jobType.jobType }}</label>
               <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -73,39 +73,22 @@
                     </tr>
                   </thead>
                   <tbody *ngIf="!showMoreFlag[jobTypeIndex]">
-                    <tr *ngFor="let entity of allEntity; let entityIndex = index">
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2">{{entity.jobName}}</td>
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2">{{entity.description}}</td>
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2">{{entity.date | date:'mediumDate'}}</td>
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2">{{entity.time}}</td>
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2 && !appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Apply Now</button></td>
-                      <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2 && appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Applied</button></td>
+                    <tr *ngFor="let entity of allEntity | filterBy: jobType; let entityIndex = index">
+                      <td>{{entity.jobName}}</td>
+                      <td>{{entity.description}}</td>
+                      <td>{{entity.date | date:'mediumDate'}}</td>
+                      <td>{{entity.time}}</td>
+                      <td *ngIf="!appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Apply Now</button></td>
+                      <td *ngIf="appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="!appliedTheButtonApply[entityIndex]">Applied</button></td>
                     </tr>
-                    <tr>Count: {{countOfJobTypes[jobTypeIndex]}}</tr>
-                    <tr *ngIf="!showMoreFlag[jobTypeIndex] && countOfJobTypes[jobTypeIndex]>3"><button (click)="showMoreButtonClick(jobTypeIndex)">Show More</button></tr>                   
+                    <tr> Count: {{countOfJobTypes[jobTypeIndex]}}</tr>
+                    <tr *ngIf="!showMoreFlag[jobTypeIndex] && countOfJobTypes[jobTypeIndex]>3"><button (click)="showMoreButtonClick(jobTypeIndex)">Show More</button></tr> 
+                    <tr *ngIf="showMoreFlag[jobTypeIndex]"><button (click)="showTop3ButtonClick(jobTypeIndex)">Show Top 3 Jobs</button></tr>                  
                   </tbody>
-                  <tbody *ngIf="showMoreFlag[jobTypeIndex]">
-                    <tr *ngFor="let entity of allEntity; let entityIndex = index">
-                      <td *ngIf="entity.jobType===jobType">{{entity.jobName}}</td>
-                      <td *ngIf="entity.jobType===jobType">{{entity.description}}</td>
-                      <td *ngIf="entity.jobType===jobType">{{entity.date}}</td>
-                      <td *ngIf="entity.jobType===jobType">{{entity.time}}</td>
-                      <td *ngIf="entity.jobType===jobType && !appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Apply Now</button></td>  
-                      <td *ngIf="entity.jobType===jobType && appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Applied</button></td>  
-                    </tr>
-                    <tr>Count: {{countOfJobTypes[jobTypeIndex]}}</tr>
-                    <tr *ngIf="showMoreFlag[jobTypeIndex]"><button (click)="showTop3ButtonClick(jobTypeIndex)">Show Top 3 Jobs</button></tr>
-                  </tbody>
-                </table>
+              </table>
                 <hr>
           </div>
       </div>
     </div>
-
-
-    <button routerLink="/detail">Show All Applied</button>
+  <button routerLink="/detail">Show All Applied</button>
 </div>
-  
-  
-  
-  

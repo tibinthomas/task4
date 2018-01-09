@@ -14,10 +14,14 @@ export class LeftPanelComponent implements OnInit {
   addJobTypeForm: FormGroup;
   showMoreFlag: Array<boolean> = [false];
 
+  start = 0;
+  end = 3;  
+
   appliedTableShow;
 
   showMoreOrNot: Array<boolean> = [false, false, false ,false, false, false];
   jobTypes: Array<string> = ['j1', 'j2', 'j3'];
+  jobTypesFilter = [{jobType:'j1'}, {jobType:'j2'}, {jobType:'j3'}];
   countOfJobTypes: Array<number> = [5,3,4,0,0,0,0,0];
   appliedTheButtonApply: Array<boolean> = [false, false, false,false, false, false,false, false, false];
 
@@ -75,11 +79,13 @@ addNewJobTypeInPopup(addJobTypeForm) {
 
 
 showMoreButtonClick(i: number) {
-  this.showMoreFlag[i] = true;
+  this.start = 0;
+  this.end = -1
 }
 
 showTop3ButtonClick(i: number) {
-  this.showMoreFlag[i] = false;
+  this.start = 0;
+  this.end = 3;
 }
 
 clickOnApplyButton(entityIndex) {

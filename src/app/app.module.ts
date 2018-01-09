@@ -9,6 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.router';
 import { AppService } from './app.service';
 
+import { FilterPipeModule } from 'ngx-filter-pipe';
+
+
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { AppService } from './app.service';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    routes
+    routes,
+    FilterPipeModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
