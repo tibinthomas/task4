@@ -18,22 +18,24 @@ export class LeftPanelComponent implements OnInit {
 
   showMoreOrNot: Array<boolean> = [false, false, false ,false, false, false];
   jobTypes: Array<string> = ['j1', 'j2', 'j3'];
-  countOfJobTypes: Array<number> = [5,1,4,0,0,0,0,0];
+  countOfJobTypes: Array<number> = [5,3,4,0,0,0,0,0];
   appliedTheButtonApply: Array<boolean> = [false, false, false,false, false, false,false, false, false];
 
   appliedJobs = [];
 
   allEntity = [
-    {jobName: 'CT',jobType: 'j1', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 0 },
-    {jobName: 'CT',jobType: 'j1', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 1 },
-    {jobName: 'CT',jobType: 'j1', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 2 },
-    {jobName: 'CT',jobType: 'j1', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 3 },
-    {jobName: 'CT',jobType: 'j1', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 4 },
-    {jobName: 'C',jobType: 'j3', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 0 },
-    {jobName: 'C',jobType: 'j3', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 1 },
-    {jobName: 'C',jobType: 'j3', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 2 },
-    {jobName: 'C',jobType: 'j3', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 3 },
-    {jobName: 'CTO',jobType: 'j2', description: 'you will die doing this', date: new Date(), time: '1-1-2018', internalIndex: 0 },
+    {jobName: 'CT',jobType: 'j1', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 0 },
+    {jobName: 'CT',jobType: 'j1', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 1 },
+    {jobName: 'CT',jobType: 'j1', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 2 },
+    {jobName: 'CT',jobType: 'j1', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 3 },
+    {jobName: 'CT',jobType: 'j1', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahahas', date: new Date(), time: '1-1-2018', internalIndex: 4 },
+    {jobName: 'C',jobType: 'j3', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 0 },
+    {jobName: 'C',jobType: 'j3', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 1 },
+    {jobName: 'C',jobType: 'j3', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 2 },
+    {jobName: 'C',jobType: 'j3', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 3 },
+    {jobName: 'CTO',jobType: 'j2', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 0 },
+    {jobName: 'CTO',jobType: 'j2', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 1 },
+    {jobName: 'CTO',jobType: 'j2', description: 'aaaaahhhhhhhhhaaaaahahhahhahahahahahahaha', date: new Date(), time: '1-1-2018', internalIndex: 2 },
 ];
 
   ngOnInit() {
@@ -43,8 +45,8 @@ export class LeftPanelComponent implements OnInit {
 
   buildForm() {
     this.jobForm = this.formBuilder.group({
-    jobName: ['', [Validators.required,Validators.pattern(/^[ A-Za-z0-9_@./#&+-]*$/),Validators.minLength(3),Validators.maxLength(15)]],
-    jobType: ['', Validators.required],
+    jobName: ['', [Validators.required, Validators.pattern(/^[ A-Za-z0-9_@./#&+-]*$/), Validators.minLength(3), Validators.maxLength(15)]],
+    jobType: [''],
     description: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]]
  });
 }

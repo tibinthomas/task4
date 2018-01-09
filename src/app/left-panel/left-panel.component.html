@@ -4,11 +4,11 @@
           <form [formGroup]="jobForm" (ngSubmit)="clickingAddNewJob(jobForm.value)">
 
               <label for="jobName">Job Name*</label>
-              <input type="text" name="jobName" id="jobName" formControlName="jobName">
-              <p *ngIf="jobForm.controls['jobName'].errors.required && jobForm.controls['jobName'].touched" [style.color]="'red'">Name is required</p>
+              <input type="text" [ngStyle]="{'border' : !jobForm.controls['jobName'].valid && jobForm.controls['jobName'].touched ? '1px solid red' : ''}" name="jobName" id="jobName" formControlName="jobName">
+              <!-- <p *ngIf="jobForm.controls['jobName'].errors.required && jobForm.controls['jobName'].touched" [style.color]="'red'">Name is required</p>
               <p *ngIf="jobForm.controls['jobName'].errors.pattern && jobForm.controls['jobName'].touched" [style.color]="'red'">Invalid name</p>
               <p *ngIf="jobForm.controls['jobName'].errors.minlength && jobForm.controls['jobName'].touched" [style.color]="'red'">Fall short in length</p>
-              <p *ngIf="jobForm.controls['jobName'].errors.maxlength && jobForm.controls['jobName'].touched" [style.color]="'red'">Exceded max length</p>
+              <p *ngIf="jobForm.controls['jobName'].errors.maxlength && jobForm.controls['jobName'].touched" [style.color]="'red'">Exceded max length</p> -->
               <br>
               <div class="row">
                 <div class="col-sm-6">
@@ -16,7 +16,7 @@
                   <select name="jobType" id="jobType" formControlName="jobType">
                     <option *ngFor="let jobType of jobTypes">{{jobType}}</option>
                   </select>
-              <p *ngIf="jobForm.controls['jobType'].errors.required && jobForm.controls['jobType'].touched" [style.color]="'red'">Name is required</p>
+              <!-- <p *ngIf="jobForm.controls['jobType'].errors.required && jobForm.controls['jobType'].touched" [style.color]="'red'">Name is required</p> -->
                 </div>
                 <div class="col-sm-2">
                   <button (click)="clickingPlusButton()" data-toggle="modal" data-target="#exampleModal"> + </button>
@@ -25,14 +25,14 @@
             
             
               <label for="description">Description*</label>
-              <textarea rows="3" cols="20" name="description" id="description" formControlName="description"></textarea>
-              <p *ngIf="jobForm.controls['description'].errors.required && jobForm.controls['description'].touched" [style.color]="'red'">Name is required</p>
-              <p *ngIf="jobForm.controls['description'].errors.pattern && jobForm.controls['description'].touched" [style.color]="'red'">Invalid name</p>
-              <p *ngIf="jobForm.controls['description'].errors.minlength && jobForm.controls['description'].touched" [style.color]="'red'">Fall short in length</p>
-              <p *ngIf="jobForm.controls['description'].errors.maxlength && jobForm.controls['description'].touched" [style.color]="'red'">Exceded max length</p>
+              <textarea [ngStyle]="{'border' : !jobForm.controls['description'].valid && jobForm.controls['description'].touched ? '1px solid red' : ''}" rows="3" cols="20" name="description" id="description" formControlName="description"></textarea>
+              <!-- <p *ngIf="jobForm.controls['description']?.errors?.required && jobForm.controls['description'].touched" [style.color]="'red'">Name is required</p>
+              <p *ngIf="jobForm.controls['description']?.errors?.pattern && jobForm.controls['description'].touched" [style.color]="'red'">Invalid name</p>
+              <p *ngIf="jobForm.controls['description']?.errors?.minlength && jobForm.controls['description'].touched" [style.color]="'red'">Fall short in length</p>
+              <p *ngIf="jobForm.controls['description']?.errors?.maxlength && jobForm.controls['description'].touched" [style.color]="'red'">Exceded max length</p> -->
               <br>
             
-              <button type="submit"  [disabled]="!jobForm.valid">Add New Job</button>
+              <button type="submit"  [disabled]="">Add New Job</button>
             </form>
             
             
@@ -82,7 +82,7 @@
                       <td *ngIf="entity.jobType===jobType && entity.internalIndex <= 2 && appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Applied</button></td>
                     </tr>
                     <tr>Count: {{countOfJobTypes[jobTypeIndex]}}</tr>
-                    <tr *ngIf="!showMoreFlag[jobTypeIndex]"><button (click)="showMoreButtonClick(jobTypeIndex)">Show More</button></tr>                   
+                    <tr *ngIf="!showMoreFlag[jobTypeIndex] && countOfJobTypes[jobTypeIndex]>3"><button (click)="showMoreButtonClick(jobTypeIndex)">Show More</button></tr>                   
                   </tbody>
                   <tbody *ngIf="showMoreFlag[jobTypeIndex]">
                     <tr *ngFor="let entity of allEntity; let entityIndex = index">
@@ -93,7 +93,7 @@
                       <td *ngIf="entity.jobType===jobType && !appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Apply Now</button></td>  
                       <td *ngIf="entity.jobType===jobType && appliedTheButtonApply[entityIndex]"><button type="action" (click)="clickOnApplyButton(entityIndex)" [disabled]="appliedTheButtonApply[entityIndex]">Applied</button></td>  
                     </tr>
-                    <tr>Count: {{count[jobTypeIndex]}}</tr>
+                    <tr>Count: {{countOfJobTypes[jobTypeIndex]}}</tr>
                     <tr *ngIf="showMoreFlag[jobTypeIndex]"><button (click)="showTop3ButtonClick(jobTypeIndex)">Show Top 3 Jobs</button></tr>
                   </tbody>
                 </table>
